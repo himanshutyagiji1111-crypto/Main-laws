@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love! 💖 ✨</title>
+    <!-- Romantic Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Canvas for Floating Glowing Hearts & Stars -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation Header -->
+    <header class="app-header">
+        <div class="logo">
+            <span class="heart-icon">💖</span>
+            <span class="logo-text" id="header-title">Birthday Surprise</span>
+        </div>
+        <div class="header-actions">
+            <button id="music-btn" class="header-btn music-btn" aria-label="Toggle Romantic Music">
+                <span class="btn-icon">🎵</span>
+                <span class="btn-text" id="music-status">Play Music</span>
+                <div class="equalizer-bars" id="equalizer">
+                    <span></span><span></span><span></span>
+                </div>
+            </button>
+            <button id="customizer-btn" class="header-btn settings-btn" aria-label="Customize Surprise">
+                <span class="btn-icon">⚙️</span>
+                <span class="btn-text">Customize</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        
+        <!-- Hero Section -->
+        <section class="hero-section glass-card">
+            <div class="hero-badge">Special Birthday Quest ✨</div>
+            <h1 class="hero-title">Happy Birthday, <span id="hero-name" class="gradient-text">My Love</span>! 🎂💖</h1>
+            <p class="hero-subtitle">
+                I've created a secret romantic quest just for you. Complete the 4 cute love challenges below to unlock your Birthday Vault & Special Letter!
+            </p>
+            
+            <!-- Quest Tracker -->
+            <div class="quest-tracker">
+                <div class="tracker-header">
+                    <span>Quest Progress</span>
+                    <span id="progress-percent">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-fill"></div>
+                </div>
+                <div class="quest-steps">
+                    <div class="step-item active" id="step-badge-1">
+                        <span class="step-num">1</span>
+                        <span class="step-label">Love Quiz</span>
+                    </div>
+                    <div class="step-item" id="step-badge-2">
+                        <span class="step-num">2</span>
+                        <span class="step-label">Scratch Note</span>
+                    </div>
+                    <div class="step-item" id="step-badge-3">
+                        <span class="step-num">3</span>
+                        <span class="step-label">Catch Hearts</span>
+                    </div>
+                    <div class="step-item" id="step-badge-4">
+                        <span class="step-num">4</span>
+                        <span class="step-label">Vault Lock</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 1: Memory Love Quiz -->
+        <section id="task-1-section" class="task-card glass-card">
+            <div class="task-badge">Task 1 of 4</div>
+            <h2 class="task-title">🧠 The Sweet Memories Quiz</h2>
+            <p class="task-desc">Answer these 3 cute questions about our journey to unlock Task #2!</p>
+
+            <div class="quiz-container" id="quiz-container">
+                <!-- Dynamic quiz cards rendered by JS -->
+            </div>
+        </section>
+
+        <!-- TASK 2: Scratch Card Envelope -->
+        <section id="task-2-section" class="task-card glass-card locked-task">
+            <div class="task-badge">Task 2 of 4</div>
+            <h2 class="task-title">💌 Magic Scratch Card Note</h2>
+            <p class="task-desc">Use your mouse or finger to scratch off the glittering cover below and reveal my secret note for you!</p>
+
+            <div class="scratch-card-wrapper">
+                <div class="scratch-underlayer">
+                    <div class="secret-note-content" id="scratch-note-text">
+                        "My Love, every single day with you feels like a dream come true. You bring sunshine into my world, warmth to my heart, and endless joy to my life. I love you more than words could ever explain! Scratch Complete! 💖✨"
+                    </div>
+                    <div class="scratch-unlocked-badge" id="scratch-unlocked-tag">✨ Unlocked! Task #2 Complete ✨</div>
+                </div>
+                <canvas id="scratch-canvas" width="340" height="200"></canvas>
+            </div>
+            <button id="next-task-2-btn" class="btn primary-btn hidden-btn">Proceed to Task 3 ✨</button>
+        </section>
+
+        <!-- TASK 3: Catch My Love Mini-Game -->
+        <section id="task-3-section" class="task-card glass-card locked-task">
+            <div class="task-badge">Task 3 of 4</div>
+            <h2 class="task-title">💖 "Catch My Love" Mini-Game</h2>
+            <p class="task-desc">Click/tap on 10 floating pink hearts to collect them all and unlock my top 10 reasons why I love you!</p>
+
+            <div class="game-score-board">
+                <span class="score-label">Hearts Collected:</span>
+                <span class="score-value" id="game-score">0 / 10</span>
+            </div>
+
+            <div class="game-canvas-wrapper">
+                <canvas id="game-canvas" width="360" height="280"></canvas>
+                <div class="game-overlay" id="game-overlay">
+                    <button id="start-game-btn" class="btn primary-btn">Start Catching Hearts 💖</button>
+                </div>
+            </div>
+
+            <!-- Reasons why section (Revealed upon game win) -->
+            <div id="reasons-container" class="reasons-wrapper hidden-element">
+                <h3 class="reasons-title">💕 10 Reasons Why I Adore You</h3>
+                <div class="reasons-grid" id="reasons-grid">
+                    <!-- 10 flip cards rendered dynamically -->
+                </div>
+                <button id="next-task-3-btn" class="btn primary-btn margin-top-md">Proceed to Final Task 🔒</button>
+            </div>
+        </section>
+
+        <!-- TASK 4: Secret Combination Vault Lock -->
+        <section id="task-4-section" class="task-card glass-card locked-task">
+            <div class="task-badge">Task 4 of 4</div>
+            <h2 class="task-title">🔒 Secret Vault Combination Lock</h2>
+            <p class="task-desc">Enter our special secret code to unlock your Birthday Vault! <br><small class="hint-text">(Hint: Enter <strong>LOVE</strong> or <strong>1214</strong>)</small></p>
+
+            <div class="lock-display" id="lock-display">
+                <span class="digit-box" id="digit-1">_</span>
+                <span class="digit-box" id="digit-2">_</span>
+                <span class="digit-box" id="digit-3">_</span>
+                <span class="digit-box" id="digit-4">_</span>
+            </div>
+
+            <div class="keypad-grid" id="keypad">
+                <button class="key-btn" data-key="L">L</button>
+                <button class="key-btn" data-key="O">O</button>
+                <button class="key-btn" data-key="V">V</button>
+                <button class="key-btn" data-key="E">E</button>
+                <button class="key-btn" data-key="1">1</button>
+                <button class="key-btn" data-key="2">2</button>
+                <button class="key-btn" data-key="4">4</button>
+                <button class="key-btn key-action" id="key-clear">CLEAR</button>
+            </div>
+
+            <p class="lock-feedback" id="lock-feedback"></p>
+        </section>
+
+        <!-- GRAND FINALE SECTION (Hidden until Vault Unlocked) -->
+        <section id="finale-section" class="finale-section glass-card hidden-element">
+            <div class="celebration-header">
+                <div class="crown-icon">👑</div>
+                <h2 class="finale-title">🎉 Happy Birthday, <span id="finale-name" class="gradient-text">My Princess</span>! 🎉</h2>
+                <p class="finale-subtitle">You successfully unlocked your Birthday Vault! Here is your special surprise...</p>
+            </div>
+
+            <!-- Interactive Cake Section -->
+            <div class="cake-container">
+                <div class="cake-image-wrapper">
+                    <img src="cake.jpg" alt="Romantic Birthday Cake" class="cake-img" id="cake-img">
+                    <canvas id="candles-canvas" class="candles-canvas"></canvas>
+                </div>
+                <div class="cake-controls">
+                    <button id="blow-candles-btn" class="btn primary-btn blow-btn">💨 Blow Candles & Make a Wish!</button>
+                    <button id="re-light-btn" class="btn secondary-btn">🔥 Re-light Candles</button>
+                </div>
+                <p id="wish-message" class="wish-message hidden-element">✨ May all your sweetest wishes come true today and always! 💖 ✨</p>
+            </div>
+
+            <!-- Polaroid Memory Gallery -->
+            <div class="polaroid-gallery-section">
+                <h3 class="gallery-title">📸 Our Favorite Memories Together</h3>
+                <div class="polaroid-grid">
+                    <div class="polaroid-card">
+                        <div class="polaroid-tape"></div>
+                        <img src="photo1.jpg" alt="Sunset Walk" class="polaroid-img">
+                        <p class="polaroid-caption" id="caption-1">Golden Sunset Walks 🌅</p>
+                    </div>
+                    <div class="polaroid-card tilt-right">
+                        <div class="polaroid-tape"></div>
+                        <img src="photo2.jpg" alt="Coffee Date" class="polaroid-img">
+                        <p class="polaroid-caption" id="caption-2">Cozy Coffee Dates ☕</p>
+                    </div>
+                    <div class="polaroid-card tilt-left">
+                        <div class="polaroid-tape"></div>
+                        <img src="photo3.jpg" alt="Starry Night" class="polaroid-img">
+                        <p class="polaroid-caption" id="caption-3">Under Starry Skies ✨</p>
+                    </div>
+                    <div class="polaroid-card">
+                        <div class="polaroid-tape"></div>
+                        <img src="photo4.jpg" alt="Holding Hands" class="polaroid-img">
+                        <p class="polaroid-caption" id="caption-4">Hand in Hand Forever 💖</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Love Letter Trigger Button -->
+            <div class="letter-trigger-container">
+                <button id="open-letter-btn" class="btn letter-btn">📜 Open My Heartfelt Love Letter 💌</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Love Letter Fullscreen Modal -->
+    <div id="letter-modal" class="modal-backdrop hidden-element">
+        <div class="modal-card letter-modal-card">
+            <button class="modal-close" id="close-letter-btn">&times;</button>
+            <div class="letter-header">
+                <span class="letter-wax-seal">❤️</span>
+                <h2 class="letter-title">A Letter For You</h2>
+            </div>
+            <div class="letter-body">
+                <div class="typewriter-text" id="typewriter-content"></div>
+            </div>
+            <div class="letter-footer">
+                <p class="letter-signature">Forever Yours,<br><strong id="letter-sender-name">Your Favorite Person ❤️</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal for Photo Preview -->
+    <div id="lightbox-modal" class="modal-backdrop hidden-element">
+        <div class="lightbox-content">
+            <button class="modal-close" id="close-lightbox-btn">&times;</button>
+            <img id="lightbox-img" src="" alt="Enlarged Memory">
+            <p id="lightbox-caption" class="lightbox-caption-text"></p>
+        </div>
+    </div>
+
+    <!-- Customizer Modal Drawer -->
+    <div id="customizer-drawer" class="modal-backdrop hidden-element">
+        <div class="modal-card customizer-card">
+            <div class="customizer-header">
+                <h3>⚙️ Customize Surprise Details</h3>
+                <button class="modal-close" id="close-customizer-btn">&times;</button>
+            </div>
+            <div class="customizer-body">
+                <form id="customizer-form">
+                    <div class="form-group">
+                        <label for="input-her-name">Her Name / Nickname:</label>
+                        <input type="text" id="input-her-name" value="My Love" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-your-name">Your Name / Signature:</label>
+                        <input type="text" id="input-your-name" value="Your Favorite Person ❤️" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-vault-code">Secret Vault Lock Code (4 chars/digits):</label>
+                        <input type="text" id="input-vault-code" value="LOVE" maxlength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-scratch-note">Scratch Card Secret Note:</label>
+                        <textarea id="input-scratch-note" rows="3">My Love, every single day with you feels like a dream come true. You bring sunshine into my world, warmth to my heart, and endless joy to my life. I love you more than words could ever explain! Scratch Complete! 💖✨</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-love-letter">Full Love Letter Text:</label>
+                        <textarea id="input-love-letter" rows="6">Dearest Birthday Girl,
+
+On this special day, I want to remind you how deeply and endlessly loved you are. From the moment you entered my life, everything became brighter, sweeter, and infinitely more meaningful. Thank you for all the laughter, the gentle hugs, the late-night talks, and the unconditional warmth you give me.
+
+May your new year be filled with boundless joy, success, adventure, and endless love. I am so blessed to walk through life by your side.
+
+Happy Birthday, my soulmate! Forever and always yours. ❤️</textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn primary-btn">Save Changes 💾</button>
+                        <button type="button" id="reset-customizer-btn" class="btn secondary-btn">Reset Defaults</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti Canvas Layer -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
